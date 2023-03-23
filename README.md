@@ -1,4 +1,4 @@
-This is a django website inspired by self-paced learning tutorials.
+This is a django website about Artificial intelligence (AI) inspired by self-paced learning tutorials.
 
 The project is developed in Python 3.11.0rc2 and Django 4.1.7.   
   
@@ -32,4 +32,8 @@ cd mysite
 python manage.py migrate
 python manage.py runserver
 ```
-
+8. Create first web app "ai":
+```commandline
+python manage.py startapp ai
+```
+9. Configure our "ai" app: add string "ai.apps.AiConfig" in INSTALLED_APPS 'mysite/mysite/settings.py';
