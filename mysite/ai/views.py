@@ -1,9 +1,15 @@
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect
 
+from .models import *
 
-def index(request): #HttpRequest
-    return HttpResponse("ai app page")
+menu = ["About", "Add Article", "Feedback", "Sign in"]
+def index(request):
+    posts = AI.objects.all()
+    return render(request, 'ai/index.html', {'posts': posts, 'menu': menu, 'title': 'Main Page'})
+
+def about(request):
+    return render(request, 'ai/about.html', {'menu': menu, 'title': 'Something about this site'})
 
 def categories(request, catid):
     if request.GET:
