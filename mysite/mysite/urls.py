@@ -27,11 +27,6 @@ urlpatterns = [
     path('', include('ai.urls'))
 ]
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('ai.urls')),
-]
-
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=MEDIA_ROOT)
 

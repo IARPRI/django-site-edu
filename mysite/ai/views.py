@@ -3,23 +3,34 @@ from django.shortcuts import render, redirect
 
 from .models import *
 
-menu = ["About", "Add Article", "Feedback", "Sign in"]
+menu = [{'title': "About", 'url_name': 'about'},
+        {'title': "Add Article", 'url_name': 'add_page'},
+        {'title': "Feedback", 'url_name': 'contact'},
+        {'title': "Sign in", 'url_name': 'login'}
+        ]
 def index(request):
     posts = AI.objects.all()
-    return render(request, 'ai/index.html', {'posts': posts, 'menu': menu, 'title': 'Main Page'})
+    context = {
+        'posts': posts,
+        'menu': menu,
+        'title': 'Main Page'
+    }
+    return render(request, 'ai/index.html', context=context)
 
 def about(request):
     return render(request, 'ai/about.html', {'menu': menu, 'title': 'Something about this site'})
 
-def categories(request, catid):
-    if request.GET:
-        print(request.GET)
-    return HttpResponse(f"<h1>Articles by category</h1><p>{catid}</p>")
+def addpage(request):
+    return HttpResponse("Add Article")
 
-def  archive (request, year):
-    if int(year) > 2022:
-        return redirect('home', permanent=True)
-    return HttpResponse(f"<h1>Archive by year</h1><p>{year}</p>")
+def contact(request):
+    return HttpResponse("Feedback")
+
+def login(request):
+    return HttpResponse("Sign in")
 
 def  pageNotFound (request, exception):
     return HttpResponseNotFound("<h1>This page does not exist</h1>")
+
+def show_post(request, post_id):
+    return HttpResponse(f"Отображение статьи с id = {post_id}")
